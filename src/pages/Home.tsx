@@ -347,8 +347,8 @@ export default function Home() {
                 onClick={() => handleOpenBooking()}
                 className="w-full md:w-auto px-6 py-3.5 bg-white hover:bg-green-50 text-green-800 rounded-2xl font-black text-xs sm:text-sm transition-all shadow-lg shadow-black/10 flex items-center justify-center gap-2.5 active:scale-95 group cursor-pointer"
               >
-                <MessageCircle className="w-4 h-4 fill-green-600 text-green-600 group-hover:scale-110 transition-transform" />
-                <span>Agendar Cita por WhatsApp</span>
+                <Calendar className="w-4 h-4 text-green-600 group-hover:scale-110 transition-transform" />
+                <span>Agendar Cita</span>
                 <ArrowRight className="w-4 h-4 text-green-700 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>

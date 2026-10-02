@@ -1,9 +1,7 @@
 import React from 'react';
-import { X, Clock, Calendar, MessageCircle, CheckCircle2 } from 'lucide-react';
+import { X, Clock, Calendar, CheckCircle2 } from 'lucide-react';
 import { Service } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
-
-const WHATSAPP_NUMBER = '51987654321';
 
 interface ServiceDetailModalProps {
   service: Service | null;
@@ -13,19 +11,6 @@ interface ServiceDetailModalProps {
 
 export default function ServiceDetailModal({ service, onClose, onBookDirect }: ServiceDetailModalProps) {
   if (!service) return null;
-
-  const handleWhatsAppQuickBook = () => {
-    const message = `🐾 *CONSULTA / RESERVA DE SERVICIO - VETPET* 🐾
------------------------------------------
-*Servicio:* ${service.name}
-*Precio estimado:* S/ ${Number(service.price).toFixed(2)}
-*Duración aprox:* ${service.duration_minutes >= 1440 ? 'Hospedaje por día' : `${service.duration_minutes} minutos`}
-
-¡Hola VetPet! Quiero agendar este servicio para mi mascota. ¿Tienen disponibilidad próxima? 🐶🐱`;
-
-    const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, '_blank');
-  };
 
   return (
     <AnimatePresence>
@@ -109,25 +94,17 @@ export default function ServiceDetailModal({ service, onClose, onBookDirect }: S
               </div>
             </div>
 
-            {/* Actions */}
-            <div className="pt-3 border-t border-gray-100 dark:border-gray-800 space-y-2.5">
-              <button
-                onClick={handleWhatsAppQuickBook}
-                className="w-full py-3.5 bg-green-500 hover:bg-green-600 text-white rounded-2xl font-black text-xs sm:text-sm transition-all shadow-lg shadow-green-100 dark:shadow-none flex items-center justify-center gap-2 active:scale-[0.98] cursor-pointer"
-              >
-                <MessageCircle className="w-4 h-4 fill-current" />
-                <span>Agendar Directo por WhatsApp</span>
-              </button>
-
+            {/* Action */}
+            <div className="pt-3 border-t border-gray-100 dark:border-gray-800">
               <button
                 onClick={() => {
                   onClose();
                   onBookDirect(service);
                 }}
-                className="w-full py-3 bg-green-50 dark:bg-green-950/60 hover:bg-green-100 dark:hover:bg-green-900/80 text-green-800 dark:text-green-300 rounded-2xl font-bold text-xs transition-all flex items-center justify-center gap-1.5 border border-green-200 dark:border-green-800/60 cursor-pointer"
+                className="w-full py-3.5 bg-green-600 hover:bg-green-700 text-white rounded-2xl font-black text-xs sm:text-sm transition-all shadow-lg shadow-green-200 dark:shadow-none flex items-center justify-center gap-2 active:scale-[0.98] cursor-pointer"
               >
-                <Calendar className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
-                <span>Completar Formulario de Cita</span>
+                <Calendar className="w-4 h-4" />
+                <span>Agendar Cita</span>
               </button>
             </div>
           </div>
