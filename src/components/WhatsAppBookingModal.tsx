@@ -105,15 +105,39 @@ ${notes ? `*Notas adicionales:* ${notes}\n` : ''}-------------------------------
               Veterinaria & Spa
             </span>
             <h3 className="text-xl sm:text-2xl font-black leading-tight">
-              Agendar Cita Médica
+              {submitted ? '¡Cita Solicitada!' : 'Agendar Cita Médica'}
             </h3>
             <p className="text-xs text-green-100 mt-1">
               Coordinamos fecha y hora directamente contigo en WhatsApp
             </p>
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-4 flex-1">
+          {/* Form or Success State */}
+          {submitted ? (
+            <div className="p-8 flex flex-col items-center justify-center text-center space-y-4 flex-1">
+              <div className="w-16 h-16 bg-green-100 dark:bg-green-950 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center shadow-lg">
+                <Calendar className="w-8 h-8" />
+              </div>
+              <div className="space-y-1.5">
+                <h4 className="text-lg font-black text-gray-900 dark:text-white">
+                  ¡Solicitud Registrada con Éxito!
+                </h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed max-w-xs mx-auto">
+                  En breve nos comunicaremos por WhatsApp para la confirmación de tu cita.
+                </p>
+              </div>
+              <button
+                onClick={() => {
+                  setSubmitted(false);
+                  onClose();
+                }}
+                className="w-full max-w-xs py-3 bg-green-600 hover:bg-green-700 text-white rounded-2xl font-black text-xs transition-all shadow-md active:scale-95 cursor-pointer mt-2"
+              >
+                <span>Cita Registrada • Entendido</span>
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-4 flex-1">
             {/* Service Selection */}
             <div>
               <label className="text-[11px] font-black text-gray-700 dark:text-gray-300 uppercase tracking-wider block mb-1">
@@ -277,6 +301,7 @@ ${notes ? `*Notas adicionales:* ${notes}\n` : ''}-------------------------------
               </button>
             </div>
           </form>
+        )}
         </motion.div>
       </div>
     </AnimatePresence>
